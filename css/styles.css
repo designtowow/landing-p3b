@@ -1,0 +1,135 @@
+@import url("tokens.css");
+
+@font-face {
+  font-family: 'Geist';
+  src: url("https://cdn.jsdelivr.net/npm/geist@1.7.2/dist/fonts/geist-sans/Geist-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--fds-font);
+  color: var(--fds-text-on-dark);
+  background-color: var(--fds-bg-dark);
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fds-bg-dark);
+  background-image: url("../assets/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* darkened beyond --fds-scrim for text contrast */
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 var(--fds-gutter-mobile);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 768px) {
+  .hero__content {
+    padding: 0 var(--fds-gutter);
+  }
+}
+
+.hero__eyebrow {
+  font-size: var(--fds-size-eyebrow);
+  font-weight: var(--fds-fw-medium);
+  letter-spacing: var(--fds-ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--fds-text-muted-on-dark);
+  margin-bottom: 1rem;
+}
+
+.hero__title {
+  font-size: var(--fds-size-display);
+  font-weight: var(--fds-fw-light);
+  line-height: var(--fds-lh-tight);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--fds-text-on-dark);
+}
+
+.hero__contact {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: var(--fds-hairline) solid var(--fds-rule-on-dark);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hero__contact-label {
+  font-size: var(--fds-size-label);
+  font-weight: var(--fds-fw-medium);
+  letter-spacing: var(--fds-ls-label);
+  text-transform: uppercase;
+  color: var(--fds-text-muted-on-dark);
+  margin-bottom: 0.25rem;
+}
+
+.hero__contact-name {
+  font-size: var(--fds-size-body-lg);
+  font-weight: var(--fds-fw-semibold);
+  color: var(--fds-text-on-dark);
+}
+
+.hero__contact-brokerage {
+  font-size: var(--fds-size-body-sm);
+  color: var(--fds-text-muted-on-dark);
+}
+
+.hero__contact-link {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  border: var(--fds-hairline) solid var(--fds-brownish-gray);
+  border-radius: var(--fds-radius-pill);
+  background-color: var(--fds-polished-stone);
+  font-size: var(--fds-size-body-sm);
+  font-weight: var(--fds-fw-medium);
+  letter-spacing: var(--fds-ls-label);
+  text-transform: uppercase;
+  color: var(--fds-black);
+  text-decoration: none;
+  transition: background-color var(--fds-ease);
+}
+
+.hero__contact-link:hover,
+.hero__contact-link:focus-visible {
+  background-color: var(--fds-brownish-gray);
+}

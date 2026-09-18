@@ -1,0 +1,121 @@
+/* ===========================================================================
+   Fairmount Design Studio — Design Tokens
+   Single source of truth for colour, type and spacing.
+   Mirrors the Figma "Brand Colors" variable collection exactly.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Module "theme" field convention
+   Every module's light/dark toggle field must be named "theme" (not
+   theme_style/theme_color/background_color_choice — those were normalized
+   away). Choice values must be "tj-theme-light" / "tj-theme-dark", rendered
+   as {{ module.theme }} directly into the module's root element class list.
+   There is no cross-module inheritance yet (see GitHub issue for that);
+   each module's fields.json still defines its own default independently —
+   just keep the name and values consistent with this convention.
+   --------------------------------------------------------------------------- */
+
+:root {
+
+  /* --- Brand colour ------------------------------------------------------ */
+  --fds-dark-mauve:       #2D2125;   /* primary dark: headers, footer, dark sections */
+  --fds-brownish-gray:    #AD997F;   /* body text on light, eyebrows on light        */
+  --fds-polished-stone:   #DDC4A8;   /* warm accent: eyebrows on dark, hairlines     */
+  --fds-pale-green:       #F9FDF7;   /* alternating light section background         */
+  --fds-smoke:            #D3D6E0;
+  --fds-steel:            #BCBFCC;
+  --fds-space:            #9DA2B3;
+  --fds-graphite:         #6E7180;
+  --fds-white:            #FFFFFF;
+  --fds-black:            #000000;   /* closing CTA button only                      */
+
+  /* Derived / utility ----------------------------------------------------- */
+  --fds-wordmark-imprint: #3C3134;   /* footer oversized wordmark (white @7% on mauve) */
+  --fds-dark-mauve-deep:  #1A1416;   /* deeper mauve for pressed/hover states        */
+  --fds-scrim:            rgba(0, 0, 0, 0.15);  /* hero image overlay                 */
+
+  /* Semantic aliases — prefer these in module CSS -------------------------- */
+  --fds-bg:                 var(--fds-white);
+  --fds-bg-alt:             var(--fds-pale-green);
+  --fds-bg-dark:            var(--fds-dark-mauve);
+
+  --fds-text:               var(--fds-dark-mauve);
+  --fds-text-muted:         var(--fds-brownish-gray);
+  --fds-text-on-dark:       var(--fds-white);
+  --fds-text-muted-on-dark: var(--fds-polished-stone);
+
+  --fds-rule:               var(--fds-polished-stone);
+  --fds-rule-on-dark:       var(--fds-brownish-gray);
+
+  /* --- Typography -------------------------------------------------------- */
+  --fds-font:             'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --fds-fw-light:         300;
+  --fds-fw-regular:       400;
+  --fds-fw-medium:        500;
+  --fds-fw-semibold:      600;
+  --fds-fw-bold:          700;
+  --fds-fw-black:         900;
+
+  /* Desktop scale */
+  --fds-size-display:     56px;
+  --fds-size-h1:          46px;
+  --fds-size-h2:          34px;
+  --fds-size-h3:          22px;
+  --fds-size-h4:          18px;
+  --fds-size-lead:        20px;
+  --fds-size-body-lg:     17px;
+  --fds-size-body:        15px;
+  --fds-size-body-sm:     13px;
+  --fds-size-label:       14px;
+  --fds-size-eyebrow:     12px;
+
+  --fds-lh-tight:         112%;
+  --fds-lh-heading:       118%;
+  --fds-lh-body:          158%;
+  --fds-lh-loose:         168%;
+
+  --fds-ls-eyebrow:       1.6px;
+  --fds-ls-label:         0.4px;
+
+  /* --- Layout ------------------------------------------------------------ */
+  --fds-gutter:           64px;   /* desktop side padding */
+  --fds-gutter-mobile:    24px;
+  --fds-content-max:      1312px; /* 1440 − (64 × 2) */
+
+  --fds-section-y:        96px;
+  --fds-section-y-mobile: 64px;
+
+  --fds-radius-pill:      100px;
+  --fds-radius-card:      0px;    /* cards are square by design */
+  --fds-hairline:         1px;
+
+  /* --- Motion ------------------------------------------------------------ */
+  --fds-parallax-rate:    0.25;   /* hero background scroll multiplier */
+  --fds-ease:             0.3s ease;
+}
+
+/* Mobile type scale ---------------------------------------------------------
+   Matches the breakpoint the generated module CSS already uses. */
+@media (max-width: 767px) {
+  :root {
+    --fds-size-display:   40px;
+    --fds-size-h1:        34px;
+    --fds-size-h2:        27px;
+    --fds-size-h3:        20px;
+    --fds-size-h4:        17px;
+    --fds-size-lead:      17px;
+    --fds-size-body-lg:   16px;
+  }
+}
+
+/* Respect reduced-motion preferences globally ------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root { --fds-parallax-rate: 0; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
