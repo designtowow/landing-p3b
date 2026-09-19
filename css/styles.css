@@ -135,13 +135,14 @@ body {
 }
 
 .hero__partners {
-  margin-top: 2.5rem;
+  margin: 2.5rem auto 0;
   padding-top: 1.75rem;
   border-top: var(--fds-hairline) solid var(--fds-rule-on-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
+  width: fit-content;
 }
 
 .hero__partners-label {
