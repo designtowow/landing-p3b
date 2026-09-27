@@ -535,6 +535,8 @@
           </div>
         </div>
         <label class="field field--full"><span class="visually-hidden">Message (optional)</span><textarea name="message" rows="1" placeholder="Message (optional)"></textarea></label>
+        <!-- Spam trap: hidden from people, filled in by bots -->
+        <label class="visually-hidden" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
         <button class="form__submit" type="submit">Request a private tour</button>
         <p class="form__note" aria-live="polite">By submitting you agree to be contacted about this property.</p>
       </form>

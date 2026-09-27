@@ -285,14 +285,14 @@
   });
 
   /* --- Tour request form --------------------------------------------------- */
-  // Submits to the HubSpot Forms API when data-hubspot-form-id is set on the
-  // form (portal 47119238). Until then, the form validates but does not send.
+  // Posts to /api/tour-request (api/tour-request/index.js), which files the
+  // lead in HubSpot with a note for the tour details and emails the agent.
   var form = document.getElementById('tour-form');
 
   if (form) {
     var note = form.querySelector('.form__note');
     var submit = form.querySelector('.form__submit');
-    var PORTAL_ID = '47119238';
+    var FALLBACK = 'Something went wrong. Please call Jeanne at 214-649-4375.';
 
     function cookie(name) {
       var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
@@ -313,33 +313,31 @@
         return;
       }
 
-      var formId = form.dataset.hubspotFormId;
-      if (!formId) {
-        note.textContent = 'Online requests are not connected yet — please call Jeanne at 214-649-4375.';
-        return;
-      }
-
-      var fields = [];
-      new FormData(form).forEach(function (value, name) {
-        if (String(value).trim()) fields.push({ name: name, value: String(value) });
-      });
+      var data = {};
+      new FormData(form).forEach(function (value, name) { data[name] = String(value); });
+      data.hutk = cookie('hubspotutk');
+      data.pageUri = location.href;
+      data.pageName = document.title;
 
       submit.disabled = true;
-      fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + PORTAL_ID + '/' + formId, {
+      note.textContent = 'Sending…';
+      fetch('/api/tour-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fields: fields,
-          context: { hutk: cookie('hubspotutk'), pageUri: location.href, pageName: document.title }
-        })
+        body: JSON.stringify(data)
       })
         .then(function (res) {
-          if (!res.ok) throw new Error(res.status);
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            if (!res.ok || !body.ok) throw new Error(body.error || res.status);
+          });
+        })
+        .then(function () {
           form.reset();
+          form.querySelectorAll('[data-date-field]').forEach(function (input) { input.type = 'text'; });
           note.textContent = 'Thank you — Jeanne will be in touch shortly to arrange your private tour.';
         })
         .catch(function () {
-          note.textContent = 'Something went wrong. Please call Jeanne at 214-649-4375.';
+          note.textContent = FALLBACK;
         })
         .then(function () { submit.disabled = false; });
     });
