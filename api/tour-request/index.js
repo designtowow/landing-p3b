@@ -57,12 +57,17 @@ module.exports = async function (context, req) {
     ipAddress: clientIp(req)
   };
 
+  // What happened at each step. Returned in the response (status codes only,
+  // never settings or secrets) so a skipped or failed step is visible in the
+  // browser's network tab without digging through function logs.
+  const steps = { form: 'pending', contact: 'skipped', note: 'skipped', email: 'skipped' };
+
   // 1. HubSpot form submission (no token needed)
-  let submitted = false;
   try {
     await submitForm(lead, page);
-    submitted = true;
+    steps.form = 'sent';
   } catch (err) {
+    steps.form = failed(err);
     context.log.error('HubSpot form submission failed:', err.message);
   }
 
@@ -71,34 +76,60 @@ module.exports = async function (context, req) {
   if (process.env.HUBSPOT_TOKEN) {
     try {
       contactId = await upsertContact(lead);
+      steps.contact = 'saved';
       await createNote(contactId, lead);
+      steps.note = 'created';
     } catch (err) {
+      steps[contactId ? 'note' : 'contact'] = failed(err);
       context.log.error('HubSpot contact/note failed:', err.message);
     }
   } else {
+    steps.contact = steps.note = 'skipped: HUBSPOT_TOKEN not set';
     context.log.warn('HUBSPOT_TOKEN not set — skipping note.');
   }
 
   // 3. Agent notification
-  let emailed = false;
   if (process.env.ACS_CONNECTION_STRING) {
     try {
       await sendEmail(lead, contactId);
-      emailed = true;
+      steps.email = 'sent';
     } catch (err) {
+      steps.email = failed(err);
       context.log.error('Agent notification email failed:', err.message);
     }
   } else {
+    steps.email = 'skipped: ACS_CONNECTION_STRING not set';
     context.log.warn('ACS_CONNECTION_STRING not set — skipping agent email.');
   }
 
+  context.log('Tour request steps:', JSON.stringify(steps));
+
   // The lead counts as captured if it reached HubSpot or the agent's inbox
-  if (submitted || contactId || emailed) {
-    context.res = json(200, { ok: true });
-  } else {
-    context.res = json(502, { ok: false, error: 'Could not send your request.' });
-  }
+  const captured = steps.form === 'sent' || contactId || steps.email === 'sent';
+  context.res = captured
+    ? json(200, { ok: true, steps })
+    : json(502, { ok: false, error: 'Could not send your request.', steps });
 };
+
+// Short, non-sensitive summary of a failure, e.g. "failed: 403 MISSING_SCOPES"
+function failed(err) {
+  if (err.status || err.code) return ['failed:', err.status, err.code].filter(Boolean).join(' ');
+  return 'failed: ' + String(err.message).slice(0, 80);
+}
+
+// Builds an Error carrying the HTTP status and the API's error code/category
+async function apiError(label, res) {
+  const text = await res.text();
+  let code;
+  try {
+    const body = JSON.parse(text);
+    code = body.category || (body.error && body.error.code) || (body.errors && body.errors[0] && body.errors[0].errorType);
+  } catch (e) { /* not JSON */ }
+  const err = new Error(label + ' ' + res.status + ' ' + text);
+  err.status = res.status;
+  err.code = code;
+  return err;
+}
 
 /* --- HubSpot --------------------------------------------------------------- */
 
@@ -117,7 +148,7 @@ async function submitForm(lead, page) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields, context })
   });
-  if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+  if (!res.ok) throw await apiError('form', res);
 }
 
 async function hubspot(path, payload) {
@@ -129,8 +160,8 @@ async function hubspot(path, payload) {
     },
     body: JSON.stringify(payload)
   });
+  if (!res.ok) throw await apiError(path, res);
   const text = await res.text();
-  if (!res.ok) throw new Error(`${path} ${res.status} ${text}`);
   return text ? JSON.parse(text) : {};
 }
 
@@ -226,7 +257,7 @@ async function sendEmail(lead, contactId) {
     },
     body: payload
   });
-  if (res.status !== 202) throw new Error(`${res.status} ${await res.text()}`);
+  if (res.status !== 202) throw await apiError('email', res);
 }
 
 function parseConnectionString(value) {

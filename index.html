@@ -516,7 +516,9 @@
         </div>
       </div>
 
-      <form class="form" id="tour-form" novalidate>
+      <!-- data-hs-do-not-collect: keep HubSpot "Collected Forms" from copying every
+           field into contact properties; /api/tour-request files the lead instead -->
+      <form class="form" id="tour-form" data-hs-do-not-collect="true" novalidate>
         <div class="form__row">
           <label class="field"><span class="visually-hidden">First name</span><input name="firstname" autocomplete="given-name" placeholder="First name" required /></label>
           <label class="field"><span class="visually-hidden">Last name</span><input name="lastname" autocomplete="family-name" placeholder="Last name" required /></label>
