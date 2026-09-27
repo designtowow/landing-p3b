@@ -26,7 +26,7 @@ const crypto = require('crypto');
 const PORTAL_ID = '47119238';
 const FORM_ID = process.env.HUBSPOT_FORM_ID || 'e0c31ff5-6c54-4eeb-b75e-e142510c9387';
 const NOTIFY_TO = process.env.NOTIFY_TO || 'edugarcia@me.com'; // placeholder until Jeanne's address is confirmed
-const NOTIFY_FROM = process.env.NOTIFY_FROM || 'noreply@fairmountstreet.com';
+const NOTIFY_FROM = process.env.NOTIFY_FROM || 'DoNotReply@fairmountstreet.com'; // must be a MailFrom address on the ACS domain
 const HUBSPOT_APP = 'https://app-na2.hubspot.com';
 
 const LIMITS = { firstname: 100, lastname: 100, email: 254, phone: 40, preferred_date: 40, working_with_agent: 3, message: 3000 };
