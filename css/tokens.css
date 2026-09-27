@@ -1,117 +1,103 @@
 /* ===========================================================================
-   Fairmount Design Studio — Design Tokens
+   Penthouse 3B — Design Tokens
    Single source of truth for colour, type and spacing.
-   Mirrors the Figma "Brand Colors" variable collection exactly.
+   Mirrors the Figma "Residence 3B — Property Website Mockup" file
+   (Desktop — 1440 / Mobile — 390 frames).
    =========================================================================== */
-
-/* ---------------------------------------------------------------------------
-   Module "theme" field convention
-   Every module's light/dark toggle field must be named "theme" (not
-   theme_style/theme_color/background_color_choice — those were normalized
-   away). Choice values must be "tj-theme-light" / "tj-theme-dark", rendered
-   as {{ module.theme }} directly into the module's root element class list.
-   There is no cross-module inheritance yet (see GitHub issue for that);
-   each module's fields.json still defines its own default independently —
-   just keep the name and values consistent with this convention.
-   --------------------------------------------------------------------------- */
 
 :root {
 
-  /* --- Brand colour ------------------------------------------------------ */
-  --fds-dark-mauve:       #2D2125;   /* primary dark: headers, footer, dark sections */
-  --fds-brownish-gray:    #AD997F;   /* body text on light, eyebrows on light        */
-  --fds-polished-stone:   #DDC4A8;   /* warm accent: eyebrows on dark, hairlines     */
-  --fds-pale-green:       #F9FDF7;   /* alternating light section background         */
-  --fds-smoke:            #D3D6E0;
-  --fds-steel:            #BCBFCC;
-  --fds-space:            #9DA2B3;
-  --fds-graphite:         #6E7180;
-  --fds-white:            #FFFFFF;
-  --fds-black:            #000000;   /* closing CTA button only                      */
+  /* --- Colour ------------------------------------------------------------ */
+  --p3b-ink:            #1C1A17;   /* headings, body on light, gallery bg        */
+  --p3b-muted:          #6E665C;   /* secondary copy on light                    */
+  --p3b-bronze:         #9C7A55;   /* section numbers, eyebrows, submit button   */
+  --p3b-rule:           #D9D1C5;   /* hairlines on light                         */
+  --p3b-cream:          #F4F0EA;   /* primary light section background           */
+  --p3b-sand:           #EAE4DA;   /* alternate light section background         */
+  --p3b-stone:          #CFC6B8;   /* map placeholder                            */
+  --p3b-espresso:       #2A211B;   /* hero + inquire background                  */
+  --p3b-white:          #FFFFFF;
 
-  /* Derived / utility ----------------------------------------------------- */
-  --fds-wordmark-imprint: #3C3134;   /* footer oversized wordmark (white @7% on mauve) */
-  --fds-dark-mauve-deep:  #1A1416;   /* deeper mauve for pressed/hover states        */
-  --fds-scrim:            rgba(0, 0, 0, 0.15);  /* hero image overlay                 */
-
-  /* Semantic aliases — prefer these in module CSS -------------------------- */
-  --fds-bg:                 var(--fds-white);
-  --fds-bg-alt:             var(--fds-pale-green);
-  --fds-bg-dark:            var(--fds-dark-mauve);
-
-  --fds-text:               var(--fds-dark-mauve);
-  --fds-text-muted:         var(--fds-brownish-gray);
-  --fds-text-on-dark:       var(--fds-white);
-  --fds-text-muted-on-dark: var(--fds-polished-stone);
-
-  --fds-rule:               var(--fds-polished-stone);
-  --fds-rule-on-dark:       var(--fds-brownish-gray);
+  --p3b-scrim-rgb:      20, 15, 13; /* hero scrims, used as rgba(var(), a)       */
+  --p3b-rule-on-dark:   rgba(255, 255, 255, 0.35);
 
   /* --- Typography -------------------------------------------------------- */
-  --fds-font:             'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --p3b-serif:          'Cormorant Garamond', 'Times New Roman', serif;
+  --p3b-sans:           'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --fds-fw-light:         300;
-  --fds-fw-regular:       400;
-  --fds-fw-medium:        500;
-  --fds-fw-semibold:      600;
-  --fds-fw-bold:          700;
-  --fds-fw-black:         900;
+  --p3b-fw-light:       300;
+  --p3b-fw-regular:     400;
+  --p3b-fw-medium:      500;
 
-  /* Desktop scale */
-  --fds-size-display:     56px;
-  --fds-size-h1:          46px;
-  --fds-size-h2:          34px;
-  --fds-size-h3:          22px;
-  --fds-size-h4:          18px;
-  --fds-size-lead:        20px;
-  --fds-size-body-lg:     17px;
-  --fds-size-body:        15px;
-  --fds-size-body-sm:     13px;
-  --fds-size-label:       14px;
-  --fds-size-eyebrow:     12px;
+  --p3b-size-hero:      148px;
+  --p3b-size-display:   60px;      /* section headlines                       */
+  --p3b-size-inquire:   64px;
+  --p3b-size-lead:      48px;      /* overview statement                      */
+  --p3b-size-plan:      44px;      /* floor plan headline                     */
+  --p3b-size-stat:      52px;
+  --p3b-size-amenity:   34px;
+  --p3b-size-package:   30px;
+  --p3b-size-feature:   26px;
+  --p3b-size-upgrade:   24px;
+  --p3b-size-number:    22px;      /* italic section number                   */
+  --p3b-size-body:      17px;
+  --p3b-size-small:     14px;
+  --p3b-size-label:     12px;      /* uppercase labels, nav, links            */
+  --p3b-size-micro:     11px;
 
-  --fds-lh-tight:         112%;
-  --fds-lh-heading:       118%;
-  --fds-lh-body:          158%;
-  --fds-lh-loose:         168%;
-
-  --fds-ls-eyebrow:       1.6px;
-  --fds-ls-label:         0.4px;
+  --p3b-ls-label:       0.26em;    /* 3.12px @ 12px                           */
+  --p3b-ls-link:        0.24em;    /* 2.88px @ 12px                           */
+  --p3b-ls-nav:         0.18em;    /* 2.16px @ 12px                           */
 
   /* --- Layout ------------------------------------------------------------ */
-  --fds-gutter:           64px;   /* desktop side padding */
-  --fds-gutter-mobile:    24px;
-  --fds-content-max:      1312px; /* 1440 − (64 × 2) */
-
-  --fds-section-y:        96px;
-  --fds-section-y-mobile: 64px;
-
-  --fds-radius-pill:      100px;
-  --fds-radius-card:      0px;    /* cards are square by design */
-  --fds-hairline:         1px;
+  --p3b-page-max:       1440px;
+  --p3b-gutter:         64px;
+  --p3b-label-col:      280px;
+  --p3b-col-gap:        96px;
+  --p3b-section-y:      160px;
 
   /* --- Motion ------------------------------------------------------------ */
-  --fds-parallax-rate:    0.25;   /* hero background scroll multiplier */
-  --fds-ease:             0.3s ease;
+  --p3b-ease:           0.3s ease;
+  --p3b-slide-ease:     0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Mobile type scale ---------------------------------------------------------
-   Matches the breakpoint the generated module CSS already uses. */
+/* Tablet ------------------------------------------------------------------- */
+@media (max-width: 1199px) {
+  :root {
+    --p3b-gutter:       40px;
+    --p3b-label-col:    160px;
+    --p3b-col-gap:      48px;
+    --p3b-section-y:    120px;
+    --p3b-size-hero:    112px;
+    --p3b-size-display: 48px;
+    --p3b-size-inquire: 52px;
+    --p3b-size-lead:    40px;
+  }
+}
+
+/* Mobile — matches the "Mobile — 390" frame -------------------------------- */
 @media (max-width: 767px) {
   :root {
-    --fds-size-display:   40px;
-    --fds-size-h1:        34px;
-    --fds-size-h2:        27px;
-    --fds-size-h3:        20px;
-    --fds-size-h4:        17px;
-    --fds-size-lead:      17px;
-    --fds-size-body-lg:   16px;
+    --p3b-gutter:       24px;
+    --p3b-section-y:    96px;
+    --p3b-size-hero:    64px;
+    --p3b-size-display: 38px;
+    --p3b-size-inquire: 40px;
+    --p3b-size-lead:    30px;
+    --p3b-size-plan:    32px;
+    --p3b-size-stat:    40px;
+    --p3b-size-amenity: 28px;
+    --p3b-size-package: 26px;
+    --p3b-size-feature: 24px;
+    --p3b-size-upgrade: 22px;
+    --p3b-size-number:  18px;
+    --p3b-size-body:    15px;
+    --p3b-size-label:   11px;
   }
 }
 
 /* Respect reduced-motion preferences globally ------------------------------ */
 @media (prefers-reduced-motion: reduce) {
-  :root { --fds-parallax-rate: 0; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

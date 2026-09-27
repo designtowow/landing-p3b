@@ -1,3 +1,3 @@
 # Video
 
-Drop project video files here (e.g. `project-walkthrough.mp4`). Not currently referenced by the page — wire it up in [index.html](../../index.html) when ready.
+Drop the property film here as `property-film.mp4` — the play button in the Film section of [index.html](../../index.html) loads it on click. Until the file exists, clicking play shows "Property film coming soon".
