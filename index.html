@@ -546,6 +546,20 @@
     </p>
   </footer>
 
+  <!-- Gallery full-screen viewer (opened by js/main.js) -->
+  <dialog class="lightbox" aria-label="Photo viewer">
+    <button class="lightbox__close" type="button" aria-label="Close photo viewer">×</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="" />
+      <figcaption class="lightbox__caption">
+        <span class="lightbox__count"></span>
+        <span class="lightbox__title"></span>
+      </figcaption>
+    </figure>
+    <button class="lightbox__arrow lightbox__arrow--prev" type="button" data-dir="-1" aria-label="Previous photo">←</button>
+    <button class="lightbox__arrow lightbox__arrow--next" type="button" data-dir="1" aria-label="Next photo">→</button>
+  </dialog>
+
   <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/47119238.js"></script>
   <!-- End of HubSpot Embed Code -->

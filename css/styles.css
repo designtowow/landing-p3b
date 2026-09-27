@@ -783,6 +783,114 @@ button {
   color: var(--p3b-ink);
 }
 
+/* Centre slide opens the full-screen viewer */
+.gallery__slide.is-current { cursor: zoom-in; }
+.gallery__slide:not(.is-current) { cursor: pointer; }
+.gallery__slide:focus-visible { outline-offset: -4px; }
+
+/* Full-screen viewer ------------------------------------------------------- */
+.lightbox {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(20, 15, 13, 0.97);
+  color: var(--p3b-white);
+}
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightbox-in 0.35s ease;
+}
+
+.lightbox::backdrop { background: transparent; }
+
+/* Lock page scroll only while the viewer is open */
+html:has(.lightbox[open]) { overflow: hidden; }
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox__figure {
+  width: 100%;
+  height: 100%;
+  padding: 72px 120px 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.lightbox__img {
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lightbox__caption {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.lightbox__count {
+  font-weight: var(--p3b-fw-regular);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.8);
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox__title {
+  font-family: var(--p3b-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  font-weight: var(--p3b-fw-light);
+  font-size: 36px;
+  line-height: 1;
+  color: var(--p3b-white);
+}
+
+.lightbox__arrow {
+  position: absolute;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  font-size: 17px;
+  color: var(--p3b-white);
+  transition: background-color var(--p3b-ease), color var(--p3b-ease);
+}
+
+.lightbox__arrow:hover {
+  background: var(--p3b-white);
+  color: var(--p3b-ink);
+}
+
+.lightbox__arrow--prev { left: 40px; }
+.lightbox__arrow--next { right: 40px; }
+
 /* ===========================================================================
    07 Make It Yours
    =========================================================================== */
@@ -1423,6 +1531,15 @@ button {
   .gallery__title { font-family: var(--p3b-sans); font-style: normal; font-size: 11px; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.8); }
   .gallery__progress { display: none; }
   .gallery__arrow { width: 40px; height: 40px; font-size: 13px; }
+
+  /* Full-screen viewer — photo edge to edge, arrows below it */
+  .lightbox__figure { padding: 64px 0 120px; }
+  .lightbox__caption { padding: 0 var(--p3b-gutter); gap: 12px; }
+  .lightbox__title { font-size: 16px; }
+  .lightbox__close { right: 8px; top: 8px; }
+  .lightbox__arrow { top: auto; bottom: 40px; margin-top: 0; width: 44px; height: 44px; font-size: 14px; }
+  .lightbox__arrow--prev { left: calc(50% - 56px); }
+  .lightbox__arrow--next { right: calc(50% - 56px); }
 
   /* Make it yours */
   .section--short-bottom .section__grid { row-gap: 28px; }
