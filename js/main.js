@@ -284,6 +284,29 @@
     input.addEventListener('blur', function () { if (!input.value) input.type = 'text'; });
   });
 
+  /* --- Lead source --------------------------------------------------------- */
+  // Remember how the visitor first arrived this session (external referrer and
+  // landing URL with any utm_* tags) so the tour request can report it.
+  var FIRST_TOUCH_KEY = 'p3b-first-touch';
+
+  function firstTouch() {
+    try {
+      var saved = sessionStorage.getItem(FIRST_TOUCH_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch (e) { /* storage unavailable */ }
+
+    var referrer = document.referrer;
+    try {
+      if (referrer && new URL(referrer).host === location.host) referrer = '';
+    } catch (e) { referrer = ''; }
+
+    var touch = { referrer: referrer, landingUrl: location.href };
+    try { sessionStorage.setItem(FIRST_TOUCH_KEY, JSON.stringify(touch)); } catch (e) { /* ignore */ }
+    return touch;
+  }
+
+  var arrival = firstTouch();
+
   /* --- Tour request form --------------------------------------------------- */
   // Posts to /api/tour-request (api/tour-request/index.js), which files the
   // lead in HubSpot with a note for the tour details and emails the agent.
@@ -318,6 +341,8 @@
       data.hutk = cookie('hubspotutk');
       data.pageUri = location.href;
       data.pageName = document.title;
+      data.referrer = arrival.referrer;
+      data.landingUrl = arrival.landingUrl;
 
       submit.disabled = true;
       note.textContent = 'Sending…';
