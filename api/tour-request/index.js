@@ -216,12 +216,11 @@ async function sendEmail(lead, contactId, meta) {
   const source = sourceDetails(meta);
   const recordUrl = contactId ? `${HUBSPOT_APP}/contacts/${PORTAL_ID}/record/0-1/${contactId}` : null;
 
-  // Tap-to-act links. Call/Text only when the phone number looks dialable.
+  // Tap-to-act links. Call only when the phone number looks dialable.
   const tel = dialable(lead.phone);
   const replySubject = 'Your private tour of Penthouse 3B';
   const actions = [
     tel && ['Call', `tel:${tel}`],
-    tel && ['Text', `sms:${tel}`],
     ['Email', `mailto:${encodeURIComponent(lead.email)}?subject=${encodeURIComponent(replySubject)}`]
   ].filter(Boolean);
 
