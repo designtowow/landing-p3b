@@ -1,0 +1,9 @@
+{
+  "name": "p3b-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Azure Static Web Apps functions for the Penthouse 3B site",
+  "engines": {
+    "node": ">=20"
+  }
+}

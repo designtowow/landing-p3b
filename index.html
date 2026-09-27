@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Lets CSS hide headlines until js/main.js splits them for the reveal -->
+  <script>document.documentElement.classList.add('js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1XG1TJETV"></script>
@@ -12,53 +14,556 @@
 
     gtag('config', 'G-Q1XG1TJETV');
   </script>
-  <title>3310 Fairmount | Coming Soon</title>
-  <meta name="description" content="3310 Fairmount — Coming Soon" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link
-    rel="preload"
-    href="https://cdn.jsdelivr.net/npm/geist@1.7.2/dist/fonts/geist-sans/Geist-Variable.woff2"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  />
+  <title>Penthouse 3B at Park Towers | 3310 Fairmount St, Dallas TX 75219</title>
+  <meta name="description" content="Renovated 3-bed, 2-bath corner penthouse at Park Towers on Turtle Creek, Dallas. 3,082 sq ft, wraparound terrace, panoramic Uptown views. Offered at $1,995,000." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Fairmount Design Studio" />
+  <meta name="theme-color" content="#2A211B" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="geo.region" content="US-TX" />
+  <meta name="geo.placename" content="Dallas" />
+  <meta name="geo.position" content="32.8008;-96.8088" />
+  <meta name="ICBM" content="32.8008, -96.8088" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" href="assets/images/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <!-- Social previews -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Penthouse 3B at Park Towers" />
+  <meta property="og:title" content="Penthouse 3B at Park Towers — Turtle Creek, Dallas" />
+  <meta property="og:description" content="Renovated 3-bed corner penthouse with a wraparound terrace and panoramic views of Turtle Creek and Uptown." />
+  <meta property="og:image" content="assets/images/hero.jpg" />
+  <meta property="og:image:width" content="2400" />
+  <meta property="og:image:height" content="1200" />
+  <meta property="og:image:alt" content="Open-concept living room and kitchen in Penthouse 3B" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- TODO: once the live domain is set, add <link rel="canonical"> and og:url,
+       and make og:image an absolute URL (some platforms ignore relative ones). -->
+
+  <!-- Structured data: real-estate listing -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": "Penthouse 3B at Park Towers",
+    "description": "Completely renovated corner penthouse with a wraparound terrace and panoramic views of Turtle Creek and Uptown, on the Katy Trail in Dallas.",
+    "image": ["assets/images/hero.jpg", "assets/images/design-kitchen.jpg", "assets/images/gallery-dining-1.jpg"],
+    "offers": {
+      "@type": "Offer",
+      "price": 1995000,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "mainEntity": {
+      "@type": "Condo",
+      "name": "Penthouse 3B",
+      "numberOfBedrooms": 3,
+      "numberOfBathroomsTotal": 2,
+      "floorSize": { "@type": "QuantitativeValue", "value": 3082, "unitCode": "FTK" },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Wraparound terrace", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Two reserved parking spaces", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "24/7 concierge", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Pool and fitness center", "value": true }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3310 Fairmount St, Penthouse 3B",
+        "addressLocality": "Dallas",
+        "addressRegion": "TX",
+        "postalCode": "75219",
+        "addressCountry": "US"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 32.8008, "longitude": -96.8088 }
+    },
+    "provider": {
+      "@type": "RealEstateAgent",
+      "name": "Jeanne Milligan",
+      "telephone": "+1-214-649-4375",
+      "url": "https://jeannemilligan.com/",
+      "worksFor": { "@type": "Organization", "name": "Allie Beth Allman & Associates" }
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Jost:wght@300;400;500&display=swap" />
+  <link rel="preload" href="assets/images/hero.jpg" as="image" />
   <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <main class="hero">
-    <video
-      class="hero__video"
-      autoplay
-      muted
-      loop
-      playsinline
-      poster="assets/images/background.jpg"
-    >
-      <source src="https://47119238.fs1.hubspotusercontent-na2.net/hubfs/47119238/videos/hero-background.mp4" type="video/mp4" />
-    </video>
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow">3310 Fairmount Street, Penthouse 3B</p>
-      <h1 class="hero__title">Coming Soon</h1>
-      <div class="hero__contact">
-        <p class="hero__contact-label">Represented by</p>
-        <p class="hero__contact-name">Jeanne Milligan</p>
-        <p class="hero__contact-brokerage">Allie Beth Allman &amp; Associates</p>
-        <a
-          class="hero__contact-link"
-          href="https://jeannemilligan.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Contact Jeanne</a>
+
+  <!-- 01 Hero ============================================================ -->
+  <header class="hero" id="top">
+    <img class="hero__image" src="assets/images/hero.jpg" alt="Open-concept living room and kitchen with a curved sofa and marble backsplash" />
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__brand" href="#top">Penthouse 3B</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="visually-hidden">Menu</span>
+        <span class="nav__bar" aria-hidden="true"></span>
+        <span class="nav__bar" aria-hidden="true"></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#floor-plan">Floor Plan</a></li>
+        <li><a href="#design">Design</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#furniture">Furniture</a></li>
+        <li><a href="#lifestyle">Lifestyle</a></li>
+        <li><a class="btn-outline" href="#inquire">Private Tour</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <p class="hero__eyebrow">Park Towers <span aria-hidden="true">&nbsp;·&nbsp;</span> Turtle Creek</p>
+        <h1 class="hero__title">Penthouse 3B</h1>
+        <p class="hero__intro">A top-to-bottom transformation of a corner penthouse with a wraparound terrace and panoramic views of Turtle Creek and Uptown.</p>
       </div>
-      <div class="hero__partners">
-        <p class="hero__partners-label">Delivered By</p>
-        <p class="hero__partners-name"><a class="hero__partners-link" href="https://www.kitchendesignconcepts.com/" target="_blank" rel="noopener noreferrer">Kitchen Design Concepts</a></p>
-        <p class="hero__partners-name"><a class="hero__partners-link" href="https://www.scottcooner.com/" target="_blank" rel="noopener noreferrer">Scott + Cooner</a></p>
-        <p class="hero__partners-name"><a class="hero__partners-link" href="https://www.fairmountstudio.com/portfolio/park-towers" target="_blank" rel="noopener noreferrer">Fairmount Design Studio</a></p>
+      <div class="hero__aside">
+        <div class="hero__offer">
+          <!-- Pricing hidden for now — remove the `hidden` attributes to show it again -->
+          <p class="hero__offer-label" hidden>Offered at</p>
+          <p class="hero__price" hidden>$1,995,000</p>
+          <a class="btn-outline hero__cta" href="#inquire">Private Tour</a>
+        </div>
+        <a class="hero__scroll" href="#overview">
+          <span>Scroll</span>
+          <span class="hero__scroll-line" aria-hidden="true"></span>
+        </a>
       </div>
     </div>
+  </header>
+
+  <main>
+
+    <!-- 02 Overview ====================================================== -->
+    <section class="section section--cream section--overview" id="overview">
+      <div class="section__grid">
+        <div class="section__label">
+          <p class="section__num">01</p>
+          <h2 class="section__name">Overview</h2>
+        </div>
+        <div class="section__body overview">
+          <p class="eyebrow">Luxury living, reimagined.</p>
+          <p class="overview__lead">Completely renovated corner penthouse with panoramic views of Turtle Creek and Uptown, located on the Katy Trail near top-tier restaurants and entertainment.</p>
+          <div class="overview__narrative">
+            <p>Floor-to-ceiling double-pane windows allow abundant natural light throughout while the wraparound terrace extends the living experience outside for morning coffee or sunset gatherings above the lush greenery of Turtle Creek.</p>
+            <p>The open-concept floorplan is centered around a spacious kitchen with luxurious finishes and generous island seating. A dramatic fireplace, sculptural wine display, and elegant bar create inviting focal points for seamless entertainment.</p>
+            <p>The primary suite creates an intimate space for relaxation with hotel-inspired features like custom millwork, mood lighting, and elegant bathroom with curated finishes. Spacious secondary bedrooms, abundant storage, brand-new systems, and the latest technology reflect the quality of a true top-to-bottom transformation.</p>
+            <p>Two reserved parking spaces, dedicated storage locker, thoughtful amenities and full-service management round out this turnkey opportunity in one of Dallas’ most desirable settings.</p>
+            <p>Property is in final finish-out stage with target completion in September 2026. Additional information is available in the documents section.</p>
+            <p class="overview__credit">Interiors by <a href="https://www.fairmountstudio.com" target="_blank">Fairmount Design Studio</a> and remodeling by <a href="https://www.kitchendesignconcepts.com" target="_blank">Kitchen Design Concepts</a>.</p>
+          </div>
+          <dl class="stats">
+            <div class="stats__item"><dt>Square feet</dt><dd>3,082</dd></div>
+            <div class="stats__item"><dt>Bedrooms</dt><dd>3</dd></div>
+            <div class="stats__item"><dt>Baths</dt><dd>2</dd></div>
+            <div class="stats__item"><dt>Parking spaces</dt><dd>2</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Floor Plan ==================================================== -->
+    <section class="section section--sand" id="floor-plan">
+      <div class="plan">
+        <div class="plan__info">
+          <div class="section__label">
+            <p class="section__num">02</p>
+            <h2 class="section__name">Floor Plan</h2>
+          </div>
+          <p class="plan__title">An open-concept plan, made for entertaining.</p>
+          <dl class="plan__rooms">
+            <div><dt>Living Room</dt><dd>19′5″ × 34′4″</dd></div>
+            <div><dt>Kitchen</dt><dd>22′7″ × 8′10″</dd></div>
+            <div><dt>Primary Bedroom</dt><dd>18′7″ × 16′</dd></div>
+            <div><dt>Bedroom 2</dt><dd>14′6″ × 17′9″</dd></div>
+            <div><dt>Bedroom 3 / Study</dt><dd>11′4″ × 17′8″</dd></div>
+            <div><dt>Main Terrace</dt><dd>40′9″ × 7′10″</dd></div>
+          </dl>
+          <!--<a class="link-line plan__download" href="assets/docs/penthouse-3b-floor-plan.pdf" download="Penthouse-3B-Floor-Plan.pdf">Download floor plan</a>-->
+        </div>
+        <figure class="plan__image">
+          <img src="assets/images/floorplan.png" alt="Furnished floor plan of Unit P3B showing living room, kitchen, three bedrooms and wraparound balcony" width="1660" height="846" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- 04 Film ========================================================== -->
+    <section class="film" id="film" aria-label="Property film">
+      <img class="film__poster" src="assets/images/film-poster.jpg" alt="" loading="lazy" />
+      <button class="film__play" type="button" data-video-src="assets/video/property-film.mp4">
+        <img src="assets/images/play-button.svg" alt="" width="160" height="160" />
+        <span class="film__caption">Video — property film</span>
+      </button>
+    </section>
+
+    <!-- 05 Design ======================================================== -->
+    <section class="section section--cream section--tall" id="design">
+      <div class="section__grid">
+        <div class="section__label">
+          <p class="section__num">03</p>
+          <h2 class="section__name">Design</h2>
+        </div>
+        <div class="section__body section__intro">
+          <p class="headline">Inspired by the views of Turtle Creek</p>
+          <p class="body-text">A neutral palette of white oak, marble and brushed bronze serves as the base for blue accents that feel timeless and rich, while tailored lighting highlights elevated design details including a sculptural wine display, curated artwork, and floating glass shelves flanking the custom vent hood enclosure. Expansive floor-to-ceiling windows draw in the warmth of the sunset glow creating a focal point for intimate gatherings and relaxation.</p>
+        </div>
+      </div>
+
+      <div class="design__images">
+        <img class="design__wide" src="assets/images/design-kitchen.jpg" alt="Kitchen with rift-cut white oak cabinetry leading to the dining room" loading="lazy" />
+        <img class="design__narrow" src="assets/images/design-island.jpg" alt="Fluted marble island with bar stool and brass faucet" loading="lazy" />
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Throughout</h3>
+          <ul>
+            <li>Floor-to-ceiling Low-E windows</li>
+            <li>Wide-plank French oak floors</li>
+            <li>Lutron® controls, EMTEK® hardware</li>
+            <li>Pre-wired for automation &amp; A/V</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Kitchen</h3>
+          <ul>
+            <li>Rift-cut white oak cabinetry, Blum® &amp; Buster+Punch® hardware</li>
+            <li>Arabescus White marble counters &amp; island</li>
+            <li>Bosch® induction range &amp; built-in refrigerator</li>
+            <li>Custom hood with Elica® insert, Brizo® fixtures</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Living &amp; Dining</h3>
+          <ul>
+            <li>Wood-burning fireplace, marble surround</li>
+            <li>Curved cove ceiling with LED mood lighting</li>
+            <li>Wet bar with wine refrigerator &amp; marble backsplash</li>
+            <li>Arteriors® light fixture, hidden-door pantry</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Vestibule</h3>
+          <ul>
+            <li>Custom wall paneling &amp; bronze mirror</li>
+            <li>Sculptural wine storage with marble surround</li>
+            <li>Accent and designer lighting</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Primary Bedroom</h3>
+          <ul>
+            <li>Phillip Jeffries® velvet accent wall</li>
+            <li>Curved rift-cut white oak paneling</li>
+            <li>Reading pendants &amp; LED mood lighting</li>
+            <li>Custom closet system</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Primary Bath</h3>
+          <ul>
+            <li>Iceberg honed marble floors &amp; wainscoting</li>
+            <li>Kohler® digital shower with rain head</li>
+            <li>Floating bench with built-in LED lighting</li>
+            <li>Robern® LED medicine cabinets</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Guest Bath</h3>
+          <ul>
+            <li>House of Hackney wallpaper</li>
+            <li>Quartz countertops and tub deck</li>
+            <li>Kohler® fixtures in brushed bronze</li>
+          </ul>
+        </div>
+        <div class="feature">
+          <h3>Additional Bedrooms</h3>
+          <ul>
+            <li>Spacious closets</li>
+            <li>Reading nooks with sunset views of Turtle Creek</li>
+            <li>Sliding glass doors</li>
+            <li>Flexible layouts for work and relaxation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TODO: point at the full details & finishes PDF once it exists -->
+      <!--<a class="link-line" href="#inquire">Download full details &amp; finishes</a>-->
+      <a class="link-line" href="#inquire">Inquire about the finishes</a>
+    </section>
+
+    <!-- 06 Gallery ======================================================= -->
+    <section class="gallery" id="gallery" aria-roledescription="carousel" aria-label="Photo gallery">
+      <div class="section__grid gallery__head">
+        <div class="section__label">
+          <p class="section__num">04</p>
+          <h2 class="section__name">Gallery</h2>
+        </div>
+        <p class="headline">Timeless and elevated design</p>
+      </div>
+
+      <div class="gallery__viewport">
+        <ul class="gallery__track">
+          <li class="gallery__slide" data-caption="Dining room" aria-roledescription="slide">
+            <img src="assets/images/gallery-dining-1.jpg" alt="Dining room with swivel lounge chairs, marble side tables and a woman in a red dress" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Bedroom" aria-roledescription="slide">
+            <img src="assets/images/gallery-bedroom-2.jpg" alt="Bedroom with walnut paneling and marble accents" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Kitchen &amp; bar" aria-roledescription="slide">
+            <img src="assets/images/gallery-dining-2.jpg" alt="Kitchen cabinetry and bar beside the dining area" loading="lazy" />
+          </li>
+        </ul>
+      </div>
+
+      <div class="gallery__controls">
+        <p class="gallery__caption" aria-live="polite">
+          <span class="gallery__count">01 / 03</span>
+          <span class="gallery__title">Dining room</span>
+        </p>
+        <div class="gallery__nav">
+          <div class="gallery__progress" aria-hidden="true"></div>
+          <div class="gallery__arrows">
+            <button class="gallery__arrow" type="button" data-dir="-1" aria-label="Previous photo">←</button>
+            <button class="gallery__arrow" type="button" data-dir="1" aria-label="Next photo">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Make It Yours ================================================= -->
+    <section class="section section--cream section--short-bottom" id="make-it-yours">
+      <div class="section__grid">
+        <div class="section__label">
+          <p class="section__num">05</p>
+          <h2 class="section__name">Make It Yours</h2>
+        </div>
+        <div class="section__body upgrades">
+          <p class="headline">Thoughtful enhancements</p>
+          <p class="body-text upgrades__intro">A curated set of upgrades are available to enhance your experience — from a spa-level steam shower to a smart home automation package. Pricing available on request.</p>
+          <div class="upgrades__grid">
+            <div class="upgrade"><h3>Kohler® steam shower</h3><p>Aromatherapy, sound therapy and digital controls in the primary bath</p></div>
+            <div class="upgrade"><h3>Refrigerated wine cellar</h3><p>Frameless glass enclosure with dedicated refrigeration.</p></div>
+            <div class="upgrade"><h3>JennAir® appliances</h3><p>Upgraded french-door refrigerator with obsidian interior and induction professional-style range with dual-fan true convection oven.</p></div>
+            <div class="upgrade"><h3>Poliform® closet system</h3><p>Integrated LED lighting; deluxe option with leather-wrapped rods and glass doors.</p></div>
+            <div class="upgrade"><h3>Motorized shades and drapes</h3><p>Somfy® motorized roller shades and custom drapes.</p></div>
+            <div class="upgrade"><h3>Control4® home automation</h3><p>Basic or deluxe packages with touch screens, whole-home audio, HVAC and shade integration</p></div>
+            <div class="upgrade"><h3>Duravit® bidet seats</h3><p>For the primary and guest baths.</p></div>
+            <div class="upgrade"><h3>Hotel-style entry</h3><p>Beautiful white-oak paneling with brass accents.</p></div>
+          </div>
+          <a class="link-line" href="#inquire">Inquire about upgrades</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 Furniture ===================================================== -->
+    <section class="section section--sand" id="furniture">
+      <div class="section__grid">
+        <div class="section__label">
+          <p class="section__num">06</p>
+          <h2 class="section__name">Furniture</h2>
+        </div>
+        <div class="section__body section__intro">
+          <p class="headline">Turn-key living made possible</p>
+          <p class="body-text">A turn-key package including furniture, artwork, soft goods and accessories — tailored to each room by the design team and our partners — is available for purchase so you can move in with just your toothbrush.</p>
+        </div>
+      </div>
+
+      <!-- Desktop: images in row 1, text in row 2. Mobile: image, text, image, text… -->
+      <div class="packages">
+        <a class="packages__image" href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer" aria-label="Scott + Cooner (opens in a new tab)"><img src="assets/images/furniture-sofa.jpg" alt="Living Divani Echoo sectional sofa in a dark showroom" loading="lazy" /></a>
+        <div class="package">
+          <h3><a href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer">Furniture</a></h3>
+          <p>Handpicked pieces for the living room, dining room, kitchen seating and all three bedrooms, from premium Italian brands like Poltrona Frau, Porada, Poliform, Cassina, and more, made possible by our collaboration with <a class="packages__image" href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer" aria-label="Scott + Cooner (opens in a new tab)">Scott+Cooner</a>.</p>
+        </div>
+        <a class="packages__image" href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer" aria-label="Ferrari Gallery (opens in a new tab)"><img src="assets/images/furniture-touchon.jpg" alt="Black and white Cecil Touchon collage above a leather sofa" loading="lazy" /></a>
+        <div class="package">
+          <h3><a href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer">Artwork</a></h3>
+          <p>Curated collection of art pieces, placed and lit for each room — made possible by our collaboration with the <a href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer">Ferrari Gallery</a> and <a class="packages__image" href="https://www.simonwaranch.com" target="_blank" rel="noopener noreferrer" aria-label="Simon Waranch (opens in a new tab)">Simon Waranch</a>.</p>
+        </div>
+        <a class="packages__image" href="https://www.simonwaranch.com" target="_blank" rel="noopener noreferrer" aria-label="Simon Waranch (opens in a new tab)"><img src="assets/images/furniture-waranch.jpg" alt="Simon Waranch installation of colorful glass orbs on a wall" loading="lazy" /></a>
+        <div class="package">
+          <h3><a href="https://www.simonwaranch.com" target="_blank" rel="noopener noreferrer">Accessories</a></h3>
+          <p>Rugs, lamps, textiles, bedding, tableware and objects that complete every space, down to the final styling.</p>
+        </div>
+      </div>
+
+      <a class="link-line" href="https://app.programa.design/share/fairmount-design-studio/h9e289" target="_blank" rel="noopener noreferrer">Explore the furniture presentation</a>
+    </section>
+
+    <!-- 09 Lifestyle ===================================================== -->
+    <section class="section section--cream" id="lifestyle">
+      <div class="section__grid">
+        <div class="section__label">
+          <p class="section__num">07</p>
+          <h2 class="section__name">Lifestyle</h2>
+        </div>
+        <p class="headline lifestyle__headline">Full-service living above Turtle Creek, on the Katy Trail.</p>
+      </div>
+
+      <p class="eyebrow">The Building — Park Towers</p>
+      <div class="amenities">
+        <div class="amenity"><h3>Concierge</h3><p>24/7 concierge, controlled access, daily trash valet and a digital resident portal</p></div>
+        <div class="amenity"><h3>Wellness</h3><p>Resort-style pool and fitness center</p></div>
+        <div class="amenity"><h3>Hosting</h3><p>Two community rooms with a full commercial kitchen, four guest suites and free guest parking</p></div>
+        <div class="amenity"><h3>Convenience</h3><p>Direct garage access, car wash station and a wood-working shop</p></div>
+      </div>
+
+      <div class="map">
+        <iframe
+          title="Map — Park Towers, Katy Trail, Turtle Creek &amp; Uptown"
+          src="https://maps.google.com/maps?q=3310%20Fairmount%20St%2C%20Dallas%2C%20TX%2075219&amp;z=15&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
+
+      <p class="eyebrow">The Neighborhood — Turtle Creek</p>
+      <!-- All within one mile (straight-line) of 3310 Fairmount Street -->
+      <div class="amenities">
+        <div class="amenity">
+          <h3>Restaurants</h3>
+          <ul class="places">
+            <li><a href="https://www.rosewoodhotels.com/en/mansion-on-turtle-creek-dallas/dining/mansion-restaurant" target="_blank" rel="noopener noreferrer">The Mansion Restaurant</a><span>0.2 mi</span></li>
+            <li><a href="https://www.nick-sams.com/" target="_blank" rel="noopener noreferrer">Nick &amp; Sam’s</a><span>0.2 mi</span></li>
+            <li><a href="https://uchi.uchirestaurants.com/location/sushi-dallas/" target="_blank" rel="noopener noreferrer">Uchi</a><span>0.3 mi</span></li>
+            <li><a href="https://noburestaurants.com/dallas" target="_blank" rel="noopener noreferrer">Nobu</a><span>0.5 mi</span></li>
+            <li><a href="https://carbonedallas.com/" target="_blank" rel="noopener noreferrer">Carbone</a><span>0.8 mi</span></li>
+          </ul>
+        </div>
+        <div class="amenity">
+          <h3>Coffee</h3>
+          <ul class="places">
+            <li><a href="https://www.twohandshospitality.com/location/two-hands-dallas/" target="_blank" rel="noopener noreferrer">Two Hands</a><span>0.3 mi</span></li>
+            <li><a href="https://www.uniondallas.org/" target="_blank" rel="noopener noreferrer">Union Coffee</a><span>0.5 mi</span></li>
+            <li><a href="https://www.instagram.com/katycoffeelab/" target="_blank" rel="noopener noreferrer">Katy Coffee Lab</a><span>0.5 mi</span></li>
+            <li><a href="https://ascension.coffee/pages/locations" target="_blank" rel="noopener noreferrer">Ascension Coffee</a><span>0.6 mi</span></li>
+            <li><a href="https://paxandbeneficia.com/pages/victory-park" target="_blank" rel="noopener noreferrer">Pax &amp; Beneficia</a><span>0.6 mi</span></li>
+          </ul>
+        </div>
+        <div class="amenity">
+          <h3>Shopping</h3>
+          <ul class="places">
+            <li><a href="https://www.stanleykorshak.com/" target="_blank" rel="noopener noreferrer">Stanley Korshak</a><span>0.5 mi</span></li>
+            <li><a href="https://westvillagedallas.com/" target="_blank" rel="noopener noreferrer">West Village</a><span>0.8 mi</span></li>
+            <li><a href="https://westvillagedallas.com/explore/q-clothier/" target="_blank" rel="noopener noreferrer">Q Clothier</a><span>0.8 mi</span></li>
+            <li><a href="https://local.tomthumb.com/tx/dallas/2380-field-st.html" target="_blank" rel="noopener noreferrer">Tom Thumb</a><span>0.8 mi</span></li>
+            <li><a href="https://westvillagedallas.com/explore/suit-supply/" target="_blank" rel="noopener noreferrer">Suitsupply</a><span>0.9 mi</span></li>
+          </ul>
+        </div>
+        <div class="amenity">
+          <h3>Wellness</h3>
+          <ul class="places">
+            <li><a href="https://crescentclubandspa.com/" target="_blank" rel="noopener noreferrer">The Spa at The Crescent</a><span>0.5 mi</span></li>
+            <li><a href="https://www.hotworx.net/studio/dallas-uptown" target="_blank" rel="noopener noreferrer">HOTWORX Uptown</a><span>0.5 mi</span></li>
+            <li><a href="https://www.soul-cycle.com/studios/tx-uptown/" target="_blank" rel="noopener noreferrer">SoulCycle</a><span>0.8 mi</span></li>
+            <li><a href="https://befitmp.com/tx/dallas-west-village/" target="_blank" rel="noopener noreferrer">BE Fit Modern Pilates</a><span>0.8 mi</span></li>
+            <li><a href="https://www.purebarre.com/location/dallas-uptown-tx" target="_blank" rel="noopener noreferrer">Pure Barre</a><span>0.9 mi</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09b Team ========================================================= -->
+    <section class="section section--sand" id="team">
+      <div class="section__grid">
+        <div class="section__label">
+          <p class="section__num">08</p>
+          <h2 class="section__name">Team</h2>
+        </div>
+        <dl class="section__body team">
+          <div><dt>General Contractor</dt><dd><a href="https://www.kitchendesignconcepts.com" target="_blank" rel="noopener noreferrer">Kitchen Design Concepts</a></dd></div>
+          <div><dt>Interior Design &amp; Architecture</dt><dd><a href="https://www.fairmountstudio.com" target="_blank" rel="noopener noreferrer">Fairmount Design Studio</a></dd></div>
+          <div><dt>Furniture</dt><dd><a href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer">Scott + Cooner</a></dd></div>
+          <div><dt>Fine Art</dt><dd><a href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer">Ferrari Gallery</a> &amp; <a href="https://www.simonwaranch.com" target="_blank" rel="noopener noreferrer">Simon Waranch</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
   </main>
+
+  <!-- 10 Inquire ========================================================= -->
+  <footer class="inquire" id="inquire">
+    <div class="inquire__row">
+      <div class="inquire__left">
+        <div class="section__label">
+          <p class="section__num">09</p>
+          <h2 class="section__name">Inquire</h2>
+        </div>
+        <p class="inquire__title">By appointment only</p>
+        <div class="agent">
+          <img class="agent__photo" src="assets/images/agent-jeanne.png" alt="Jeanne Milligan" width="88" height="88" loading="lazy" />
+          <div class="agent__info">
+            <p class="agent__name">Jeanne Milligan</p>
+            <p class="agent__firm">Realtor® <span aria-hidden="true">&nbsp;·&nbsp;</span> Allie Beth Allman &amp; Associates</p>
+            <p class="agent__contact">
+              <a href="tel:+12146494375">214-649-4375</a>
+              <span aria-hidden="true">&nbsp;·&nbsp;</span>
+              <a href="https://jeannemilligan.com/" target="_blank" rel="noopener noreferrer">jeannemilligan.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- data-hs-do-not-collect: keep HubSpot "Collected Forms" from copying every
+           field into contact properties; /api/tour-request files the lead instead -->
+      <form class="form" id="tour-form" data-hs-do-not-collect="true" novalidate>
+        <div class="form__row">
+          <label class="field"><span class="visually-hidden">First name</span><input name="firstname" autocomplete="given-name" placeholder="First name" required /></label>
+          <label class="field"><span class="visually-hidden">Last name</span><input name="lastname" autocomplete="family-name" placeholder="Last name" required /></label>
+        </div>
+        <div class="form__row">
+          <label class="field"><span class="visually-hidden">Email</span><input name="email" type="email" autocomplete="email" placeholder="Email" required /></label>
+          <label class="field"><span class="visually-hidden">Phone</span><input name="phone" type="tel" autocomplete="tel" placeholder="Phone" /></label>
+        </div>
+        <div class="form__row">
+          <label class="field"><span class="visually-hidden">Preferred date</span><input name="preferred_date" type="text" placeholder="Preferred date" data-date-field /></label>
+          <div class="field field--choice" role="radiogroup" aria-labelledby="agent-q">
+            <span id="agent-q">Working with an agent?</span>
+            <label><input class="visually-hidden" type="radio" name="working_with_agent" value="Yes" />Yes</label>
+            <span aria-hidden="true">/</span>
+            <label><input class="visually-hidden" type="radio" name="working_with_agent" value="No" />No</label>
+          </div>
+        </div>
+        <label class="field field--full"><span class="visually-hidden">Message (optional)</span><textarea name="message" rows="1" placeholder="Message (optional)"></textarea></label>
+        <!-- Spam trap: hidden from people, filled in by bots -->
+        <label class="visually-hidden" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+        <button class="form__submit" type="submit">Request a private tour</button>
+        <p class="form__note" aria-live="polite">By submitting you agree to be contacted about this property.</p>
+      </form>
+    </div>
+
+    <p class="legal">
+      <a href="https://content.mediastg.net/Media/downloads/abaag/20220406034140.pdf" target="_blank" rel="noopener noreferrer">Texas Real Estate Commission Information About Brokerage Services</a>
+      <span aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+      <a href="https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-5_0.pdf" target="_blank" rel="noopener noreferrer">Texas Real Estate Commission Consumer Protection Notice</a>
+    </p>
+  </footer>
+
+  <!-- Gallery full-screen viewer (opened by js/main.js) -->
+  <dialog class="lightbox" aria-label="Photo viewer">
+    <button class="lightbox__close" type="button" aria-label="Close photo viewer">×</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="" />
+      <figcaption class="lightbox__caption">
+        <span class="lightbox__count"></span>
+        <span class="lightbox__title"></span>
+      </figcaption>
+    </figure>
+    <button class="lightbox__arrow lightbox__arrow--prev" type="button" data-dir="-1" aria-label="Previous photo">←</button>
+    <button class="lightbox__arrow lightbox__arrow--next" type="button" data-dir="1" aria-label="Next photo">→</button>
+  </dialog>
 
   <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/47119238.js"></script>

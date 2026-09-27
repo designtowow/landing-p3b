@@ -1,5 +1,5 @@
 # Images
 
-Put the background image here as `background.jpg` (referenced by [css/styles.css](../../css/styles.css)).
+Exported from the Figma file "Residence 3B — Property Website Mockup". Each file maps to the `IMG:` layer of the same subject (hero, design, gallery, furniture, floor plan, agent headshot).
 
-Recommended: a landscape image at least 1920x1080, optimized/compressed for web (JPEG or WebP) to keep page load fast.
+Keep photos as compressed JPEG (or WebP) — the source renders are 2400×1200.
