@@ -315,6 +315,20 @@ button {
 
 .nav__links a:not(.btn-outline):hover { color: var(--p3b-white); }
 
+/* Tour of Homes link — shown by js/main.js only until the event ends */
+.nav__event button {
+  font-weight: var(--p3b-fw-regular);
+  font-size: 12px;
+  letter-spacing: var(--p3b-ls-nav);
+  text-transform: uppercase;
+  color: var(--p3b-champagne);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: color var(--p3b-ease);
+}
+
+.nav__event button:hover { color: var(--p3b-white); }
+
 .nav__toggle {
   display: none;
   position: relative;
@@ -405,6 +419,18 @@ button {
 }
 
 .hero__cta { display: none; }
+
+/* Tour of Homes button — phones/tablets only (desktop uses the nav link) */
+.hero__event {
+  display: none;
+  font-weight: var(--p3b-fw-regular);
+  font-size: 11px;
+  letter-spacing: var(--p3b-ls-nav);
+  text-transform: uppercase;
+  color: var(--p3b-champagne);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
 
 .hero__scroll {
   display: flex;
@@ -812,7 +838,120 @@ button {
 .lightbox::backdrop { background: transparent; }
 
 /* Lock page scroll only while the viewer is open */
-html:has(.lightbox[open]) { overflow: hidden; }
+html:has(.lightbox[open]),
+html:has(.event-modal[open]) { overflow: hidden; }
+
+/* ===========================================================================
+   Event modal — Turtle Creek Tour of Homes
+   =========================================================================== */
+
+.event-modal {
+  width: min(920px, calc(100% - 48px));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: var(--p3b-cream);
+  color: var(--p3b-ink);
+  overflow: auto;
+}
+
+.event-modal[open] {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  animation: event-in 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.event-modal::backdrop {
+  background: rgba(var(--p3b-scrim-rgb), 0.65);
+}
+
+@keyframes event-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.event-modal__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.event-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 56px 48px 48px;
+}
+
+.event-modal__eyebrow {
+  font-weight: var(--p3b-fw-medium);
+  font-size: 11px;
+  letter-spacing: var(--p3b-ls-label);
+  text-transform: uppercase;
+  color: var(--p3b-bronze);
+}
+
+.event-modal__title {
+  font-family: var(--p3b-serif);
+  font-weight: var(--p3b-fw-light);
+  font-size: 44px;
+  line-height: 1.05;
+}
+
+.event-modal__copy {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--p3b-muted);
+}
+
+.event-modal__actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 8px;
+}
+
+.event-modal__cta {
+  padding: 18px 36px;
+  background: var(--p3b-bronze);
+  font-weight: var(--p3b-fw-medium);
+  font-size: 12px;
+  letter-spacing: var(--p3b-ls-link);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--p3b-white);
+  transition: background-color var(--p3b-ease);
+}
+
+.event-modal__cta:hover { background: #87694A; }
+
+.event-modal__later {
+  font-weight: var(--p3b-fw-regular);
+  font-size: 12px;
+  letter-spacing: var(--p3b-ls-link);
+  text-transform: uppercase;
+  color: var(--p3b-muted);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+.event-modal__later:hover { color: var(--p3b-ink); }
+
+.event-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  font-weight: var(--p3b-fw-light);
+  font-size: 30px;
+  line-height: 1;
+  color: var(--p3b-ink);
+}
 
 @keyframes lightbox-in {
   from { opacity: 0; }
@@ -1384,6 +1523,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 
   .hero__offer-label { display: none; }
   .hero__cta { display: inline-block; }
+  .hero__event:not([hidden]) { display: inline-block; }
   .hero__scroll { display: none; }
 }
 
@@ -1540,6 +1680,32 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .lightbox__arrow { top: auto; bottom: 40px; margin-top: 0; width: 44px; height: 44px; font-size: 14px; }
   .lightbox__arrow--prev { left: calc(50% - 56px); }
   .lightbox__arrow--next { right: calc(50% - 56px); }
+
+  /* Event modal — bottom sheet, so the page stays visible behind it */
+  .event-modal {
+    width: 100%;
+    max-height: 88dvh;
+    margin: auto 0 0;
+  }
+
+  .event-modal[open] {
+    grid-template-columns: 1fr;
+    animation-name: event-sheet-in;
+  }
+
+  @keyframes event-sheet-in {
+    from { transform: translateY(100%); }
+    to   { transform: none; }
+  }
+
+  .event-modal__media { height: 200px; }
+  .event-modal__media img { object-position: center 42%; } /* keep the guests and open doorway in the strip */
+  .event-modal__body { gap: 14px; padding: 28px var(--p3b-gutter) 32px; }
+  .event-modal__title { font-size: 32px; }
+  .event-modal__copy { font-size: 14px; line-height: 1.65; }
+  .event-modal__actions { flex-direction: column; align-items: stretch; gap: 18px; text-align: center; }
+  .event-modal__later { align-self: center; }
+  .event-modal__close { top: 8px; right: 8px; color: var(--p3b-white); text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); }
 
   /* Make it yours */
   .section--short-bottom .section__grid { row-gap: 28px; }

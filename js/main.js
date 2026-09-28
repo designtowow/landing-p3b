@@ -118,6 +118,72 @@
     });
   }
 
+  /* --- Event modal: Turtle Creek Tour of Homes ----------------------------- */
+  // One-time event. Opens once per visitor after they scroll past the hero or
+  // spend a few seconds on the page; the nav link reopens it. Everything
+  // switches off after the event ends (data-ends on the dialog).
+  var eventModal = document.querySelector('.event-modal');
+
+  if (eventModal && eventModal.showModal && Date.now() < Date.parse(eventModal.dataset.ends)) {
+    var EVENT_KEY = 'p3b-tour-of-homes-2026';
+    var EVENT_DELAY = 8000; // ms
+    // Nav link and hero button — hidden in the markup so they vanish after the event
+    document.querySelectorAll('[data-event-only]').forEach(function (el) { el.hidden = false; });
+
+    function seenEvent() {
+      try { return localStorage.getItem(EVENT_KEY); } catch (e) { return 'unavailable'; }
+    }
+    function rememberEvent(value) {
+      try { localStorage.setItem(EVENT_KEY, value); } catch (e) { /* ignore */ }
+    }
+    function track(name) {
+      if (typeof window.gtag === 'function') window.gtag('event', name, { event_category: 'tour_of_homes' });
+    }
+
+    function openEvent(source) { // 'auto' | 'click' | 'link'
+      if (eventModal.open) return;
+      // Never interrupt the menu, the photo viewer or someone filling in the form
+      if (source === 'auto' && (document.querySelector('dialog[open]') || (nav && nav.classList.contains('is-open')) ||
+          (document.activeElement && document.activeElement.closest('#tour-form')))) return;
+      if (nav && nav.classList.contains('is-open')) setNav(false);
+      eventModal.showModal();
+      if (!seenEvent() || seenEvent() === 'unavailable') rememberEvent('seen');
+      track({ auto: 'tour_modal_auto_open', click: 'tour_modal_open', link: 'tour_modal_link_open' }[source]);
+    }
+
+    document.querySelectorAll('[data-open-event]').forEach(function (btn) {
+      btn.addEventListener('click', function () { openEvent('click'); });
+    });
+    eventModal.querySelectorAll('[data-close-event]').forEach(function (btn) {
+      btn.addEventListener('click', function () { eventModal.close(); track('tour_modal_dismiss'); });
+    });
+    // Click on the dimmed backdrop (the dialog element itself) closes it
+    eventModal.addEventListener('click', function (e) {
+      if (e.target === eventModal) { eventModal.close(); track('tour_modal_dismiss'); }
+    });
+    eventModal.querySelector('[data-event-tickets]').addEventListener('click', function () {
+      rememberEvent('tickets');
+      track('tour_tickets_click');
+    });
+
+    // Shareable link: ?tour always opens the modal (e.g. from Instagram or email)
+    if (new URLSearchParams(location.search).has('tour')) {
+      setTimeout(function () { openEvent('link'); }, 600);
+    } else if (!seenEvent()) {
+      // Auto-open once, on whichever comes first: scrolled past the hero, or the delay
+      var autoTimer = setTimeout(function () { triggerAuto(); }, EVENT_DELAY);
+      var onScroll = function () {
+        if (hero && hero.getBoundingClientRect().bottom < window.innerHeight * 0.5) triggerAuto();
+      };
+      var triggerAuto = function () {
+        clearTimeout(autoTimer);
+        window.removeEventListener('scroll', onScroll);
+        if (!seenEvent()) openEvent('auto');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+  }
+
   /* --- Gallery carousel ---------------------------------------------------- */
   var gallery = document.querySelector('.gallery');
 

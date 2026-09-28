@@ -45,6 +45,38 @@
        and make og:image an absolute URL (some platforms ignore relative ones). -->
 
   <!-- Structured data: real-estate listing -->
+  <!-- Structured data: Turtle Creek Tour of Homes (one-time event) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Turtle Creek Association Tour of Homes",
+    "description": "Tour a completely renovated penthouse at 3310 Fairmount Street P3B — floor-to-ceiling windows, a wraparound terrace with panoramic views, a sculptural wine display, curated Italian furniture and fine art from local artists.",
+    "startDate": "2026-10-04T13:00:00-05:00",
+    "endDate": "2026-10-04T16:00:00-05:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "Park Towers — Penthouse 3B",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3310 Fairmount St",
+        "addressLocality": "Dallas",
+        "addressRegion": "TX",
+        "postalCode": "75219",
+        "addressCountry": "US"
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://e.givesmart.com/events/Pk3/?isOrderFormActive=true",
+      "availability": "https://schema.org/InStock"
+    },
+    "organizer": { "@type": "Organization", "name": "Turtle Creek Association" }
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -117,6 +149,7 @@
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#furniture">Furniture</a></li>
         <li><a href="#lifestyle">Lifestyle</a></li>
+        <li class="nav__event" data-event-only hidden><button type="button" data-open-event>Tour of Homes · Oct 4</button></li>
         <li><a class="btn-outline" href="#inquire">Private Tour</a></li>
       </ul>
     </nav>
@@ -133,6 +166,8 @@
           <p class="hero__offer-label" hidden>Offered at</p>
           <p class="hero__price" hidden>$1,995,000</p>
           <a class="btn-outline hero__cta" href="#inquire">Private Tour</a>
+          <!-- Phones/tablets only; shown by js/main.js until the Tour of Homes ends -->
+          <button class="hero__event" type="button" data-open-event data-event-only hidden>Tour of Homes · Oct 4</button>
         </div>
         <a class="hero__scroll" href="#overview">
           <span>Scroll</span>
@@ -550,6 +585,24 @@
       <a href="https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-5_0.pdf" target="_blank" rel="noopener noreferrer">Texas Real Estate Commission Consumer Protection Notice</a>
     </p>
   </footer>
+
+  <!-- Turtle Creek Tour of Homes (one-time event). js/main.js opens this once
+       per visitor and stops showing it after data-ends. -->
+  <dialog class="event-modal" aria-labelledby="event-title" data-ends="2026-10-04T16:00:00-05:00">
+    <button class="event-modal__close" type="button" aria-label="Close" data-close-event>×</button>
+    <div class="event-modal__media">
+      <img src="assets/images/tour-of-homes.jpg" alt="Guests in shoe covers entering a home's arched foyer during a Turtle Creek Association Tour of Homes" width="1200" height="1600" loading="lazy" />
+    </div>
+    <div class="event-modal__body">
+      <p class="event-modal__eyebrow">Turtle Creek Association Tour of Homes</p>
+      <h2 class="event-modal__title" id="event-title">Sunday, October 4<br />1 to 4 pm</h2>
+      <p class="event-modal__copy">Experience the lifestyle and convenience of luxury high-rise living during the Turtle Creek Association Tour of Homes, Sunday, October 4, from 1 to 4 pm. The tour includes a completely renovated penthouse at 3310 Fairmount Street P3B, featuring floor-to-ceiling windows, a wraparound terrace with panoramic views, a sculptural wine display, and a kitchen made for entertaining. Inside, enjoy curated Italian furniture and pieces of fine art from local artists. Come see this unique property.</p>
+      <div class="event-modal__actions">
+        <a class="event-modal__cta" href="https://e.givesmart.com/events/Pk3/?isOrderFormActive=true" target="_blank" rel="noopener noreferrer" data-event-tickets>Get tickets</a>
+        <button class="event-modal__later" type="button" data-close-event>Maybe later</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Gallery full-screen viewer (opened by js/main.js) -->
   <dialog class="lightbox" aria-label="Photo viewer">
