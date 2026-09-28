@@ -16,6 +16,7 @@
   --p3b-sand:           #EAE4DA;   /* alternate light section background         */
   --p3b-stone:          #CFC6B8;   /* map placeholder                            */
   --p3b-espresso:       #2A211B;   /* hero + inquire background                  */
+  --p3b-champagne:      #DDC4A8;   /* accent on dark: Tour of Homes nav link     */
   --p3b-white:          #FFFFFF;
 
   --p3b-scrim-rgb:      20, 15, 13; /* hero scrims, used as rgba(var(), a)       */
