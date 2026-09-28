@@ -1620,13 +1620,14 @@ html:has(.event-modal[open]) { overflow: hidden; }
   .stats__item { gap: 6px; padding: 16px 0 20px; }
   .stats dt { font-size: 10px; }
 
-  /* Floor plan — the mobile frame drops the drawing; the link downloads it */
+  /* Floor plan — drawing stays landscape at full width; the link downloads the PDF */
+  .plan { row-gap: 40px; }
   .plan__info .section__label + .plan__title { margin: 20px 0 40px; }
   .plan__title { font-size: 38px; line-height: 1.08; }
   .plan__rooms > div { padding: 12px 0; font-size: 13px; }
   .plan__rooms > div + div { margin-top: 0; }
   .plan__download { margin-top: 40px; }
-  .plan__image { display: none; }
+  .plan__image { aspect-ratio: 1660 / 846; padding: 12px; }
 
   /* Film */
   .film__play { gap: 16px; }
