@@ -247,7 +247,9 @@ button {
 .hero__scrim {
   position: absolute;
   inset: 0;
+  /* First layer: a flat 30% dim over the whole photo, for text legibility */
   background:
+    linear-gradient(rgba(var(--p3b-scrim-rgb), 0.3), rgba(var(--p3b-scrim-rgb), 0.3)),
     linear-gradient(90deg, rgba(var(--p3b-scrim-rgb), 0.55) 0%, rgba(var(--p3b-scrim-rgb), 0) 50%),
     linear-gradient(180deg,
       rgba(var(--p3b-scrim-rgb), 0.45) 0%,
@@ -418,6 +420,11 @@ button {
   line-height: 1.2;
 }
 
+.hero__ask { display: contents; }
+
+.hero__price a { color: inherit; text-decoration: none; transition: opacity var(--p3b-ease); }
+.hero__price a:hover { opacity: 0.8; }
+
 .hero__cta { display: none; }
 
 /* Tour of Homes button — phones/tablets only (desktop uses the nav link) */
@@ -445,10 +452,29 @@ button {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.hero__scroll {
+  /* Follows the scroll position (set from js/main.js): drifts down and fades as the page moves */
+  opacity: calc(1 - var(--scroll-p, 0));
+  translate: 0 calc(var(--scroll-p, 0) * 18px);
+}
+
 .hero__scroll-line {
   width: 1px;
   height: 56px;
   background: rgba(255, 255, 255, 0.6);
+  transform-origin: top;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__scroll-line { animation: scroll-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+}
+
+/* The line draws downward, then wipes away off the bottom */
+@keyframes scroll-cue {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  50.01% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
 /* ===========================================================================
@@ -1517,11 +1543,17 @@ html:has(.event-modal[open]) { overflow: hidden; }
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    column-gap: 14px;
     width: 100%;
     padding-top: 12px;
   }
 
-  .hero__offer-label { display: none; }
+  /* Private Tour left, Tour of Homes beside it, price pinned right */
+  .hero__cta { order: 1; }
+  .hero__event { order: 2; }
+
+  .hero__ask { order: 3; margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .hero__offer-label { font-size: 8px; letter-spacing: 0.2em; white-space: nowrap; }
   .hero__cta { display: inline-block; }
   .hero__event:not([hidden]) { display: inline-block; }
   .hero__scroll { display: none; }
@@ -1591,7 +1623,9 @@ html:has(.event-modal[open]) { overflow: hidden; }
   .hero { height: 780px; height: min(100svh, 860px); min-height: 640px; }
 
   .hero__scrim {
-    background: linear-gradient(180deg,
+    background:
+      linear-gradient(rgba(var(--p3b-scrim-rgb), 0.3), rgba(var(--p3b-scrim-rgb), 0.3)),
+      linear-gradient(180deg,
       rgba(var(--p3b-scrim-rgb), 0.5) 0%,
       rgba(var(--p3b-scrim-rgb), 0) 30%,
       rgba(var(--p3b-scrim-rgb), 0.2) 55%,
@@ -1603,8 +1637,14 @@ html:has(.event-modal[open]) { overflow: hidden; }
   .hero__copy { gap: 16px; }
   .hero__eyebrow { font-size: 10px; }
   .hero__intro { font-size: 15px; }
-  .hero__price { font-size: 26px; }
+  .hero__price { font-size: 26px; white-space: nowrap; }
   .hero__cta { padding: 10px 16px; font-size: 11px; letter-spacing: 0.18em; }
+  /* Tour of Homes link is tablet-and-up on the hero; phones keep the row to Private Tour + price */
+  .hero__event:not([hidden]) { display: none; }
+
+  /* Scroll cue, centred under the offer row */
+  .hero__scroll { display: flex; position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); gap: 8px; font-size: 9px; }
+  .hero__scroll-line { height: 26px; }
 
   /* Overview */
   .overview { gap: 24px; }
@@ -1627,7 +1667,7 @@ html:has(.event-modal[open]) { overflow: hidden; }
   .plan__rooms > div { padding: 12px 0; font-size: 13px; }
   .plan__rooms > div + div { margin-top: 0; }
   .plan__download { margin-top: 40px; }
-  .plan__image { aspect-ratio: 1660 / 846; padding: 12px; }
+  .plan__image { aspect-ratio: 2427 / 1252; padding: 12px; }
 
   /* Film */
   .film__play { gap: 16px; }

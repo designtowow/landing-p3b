@@ -83,7 +83,7 @@
     "@type": "RealEstateListing",
     "name": "Penthouse 3B at Park Towers",
     "description": "Completely renovated corner penthouse with a wraparound terrace and panoramic views of Turtle Creek and Uptown, on the Katy Trail in Dallas.",
-    "image": ["assets/images/hero.jpg", "assets/images/design-kitchen.jpg", "assets/images/gallery-dining-1.jpg"],
+    "image": ["assets/images/hero.jpg", "assets/images/design-dining.jpg", "assets/images/gallery-kitchen-1.jpg"],
     "offers": {
       "@type": "Offer",
       "price": 1995000,
@@ -124,7 +124,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Jost:wght@300;400;500&display=swap" />
-  <link rel="preload" href="assets/images/hero.jpg" as="image" />
+  <!-- Hero A/B test: each page load picks one of four images at random (25% each) and keeps it for that view.
+       Runs before first paint so the preload and <img> both use the chosen file. The variant is
+       exposed as <html data-hero-variant="living|kitchen|kitchen2|lounge"> for analytics. -->
+  <script>
+    (function () {
+      var variants = {
+        living: { src: "assets/images/hero.jpg", alt: "Open-concept living room with a curved sofa and floor-to-ceiling windows" },
+        kitchen: { src: "assets/images/hero-kitchen.jpg", alt: "Kitchen island with fluted marble and bar stools, seen from the living room sofa" },
+        kitchen2: { src: "assets/images/hero-kitchen-2.jpg", alt: "Galley kitchen with brass hardware looking through to the dining room and a sculptural wall piece" },
+        lounge: { src: "assets/images/hero-lounge.jpg", alt: "Lounge with four leather swivel chairs around a glass coffee table, framed by skyline views" }
+      };
+      var names = Object.keys(variants);
+      var name = names[Math.floor(Math.random() * names.length)];
+      window.__hero = variants[name];
+      document.documentElement.setAttribute("data-hero-variant", name);
+      var link = document.createElement("link");
+      link.rel = "preload"; link.as = "image"; link.href = variants[name].src;
+      document.head.appendChild(link);
+    })();
+  </script>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="js/main.js" defer></script>
 </head>
@@ -132,7 +151,15 @@
 
   <!-- 01 Hero ============================================================ -->
   <header class="hero" id="top">
-    <img class="hero__image" src="assets/images/hero.jpg" alt="Open-concept living room and kitchen with a curved sofa and marble backsplash" />
+    <img class="hero__image" id="hero-image" alt="" />
+    <script>
+      (function () {
+        var v = window.__hero || { src: "assets/images/hero.jpg", alt: "Open-concept living room with a curved sofa and floor-to-ceiling windows" };
+        var img = document.getElementById("hero-image");
+        img.alt = v.alt; img.src = v.src;
+      })();
+    </script>
+    <noscript><img class="hero__image" src="assets/images/hero.jpg" alt="Open-concept living room with a curved sofa and floor-to-ceiling windows" /></noscript>
     <div class="hero__scrim" aria-hidden="true"></div>
 
     <nav class="nav" aria-label="Primary">
@@ -162,9 +189,10 @@
       </div>
       <div class="hero__aside">
         <div class="hero__offer">
-          <!-- Pricing hidden for now — remove the `hidden` attributes to show it again -->
-          <p class="hero__offer-label" hidden>Offered at</p>
-          <p class="hero__price" hidden>$1,995,000</p>
+          <div class="hero__ask">
+            <p class="hero__offer-label">Offered at</p>
+            <p class="hero__price"><a href="https://ntrdd.mlsmatrix.com/matrix/shared/38N4R0bZ12f/3310FairmountStreet" target="_blank" rel="noopener noreferrer" aria-label="$1,995,000 — view the MLS listing (opens in a new tab)">$1,995,000</a></p>
+          </div>
           <a class="btn-outline hero__cta" href="#inquire">Private Tour</a>
           <!-- Phones/tablets only; shown by js/main.js until the Tour of Homes ends -->
           <button class="hero__event" type="button" data-open-event data-event-only hidden>Tour of Homes · Oct 4</button>
@@ -213,7 +241,7 @@
             <p class="section__num">02</p>
             <h2 class="section__name">Floor Plan</h2>
           </div>
-          <p class="plan__title">An open-concept plan, made for entertaining.</p>
+          <p class="plan__title">An open-concept layout, made for entertaining.</p>
           <dl class="plan__rooms">
             <div><dt>Living Room</dt><dd>19′5″ × 34′4″</dd></div>
             <div><dt>Kitchen</dt><dd>22′7″ × 8′10″</dd></div>
@@ -225,7 +253,7 @@
           <a class="link-line plan__download" href="assets/docs/penthouse-3b-floor-plan.pdf" download="3310-Fairmount-P3B-Floor-Plan.pdf">Download floor plan</a>
         </div>
         <figure class="plan__image">
-          <img src="assets/images/floorplan.png" alt="Furnished floor plan of Unit P3B showing living room, kitchen, three bedrooms and wraparound balcony" width="1660" height="846" loading="lazy" />
+          <img src="assets/images/floorplan.png" alt="Furnished floor plan of Unit P3B showing living room, kitchen, three bedrooms and wraparound balcony" width="2427" height="1252" loading="lazy" />
         </figure>
       </div>
     </section>
@@ -253,8 +281,8 @@
       </div>
 
       <div class="design__images">
-        <img class="design__wide" src="assets/images/design-kitchen.jpg" alt="Kitchen with rift-cut white oak cabinetry leading to the dining room" loading="lazy" />
-        <img class="design__narrow" src="assets/images/design-island.jpg" alt="Fluted marble island with bar stool and brass faucet" loading="lazy" />
+        <img class="design__wide" src="assets/images/design-dining.jpg" alt="Dining table beneath a sculptural wall piece, with a walnut and marble bar beyond" loading="lazy" />
+        <img class="design__narrow" src="assets/images/design-primary-bedroom.jpg" alt="Primary bedroom with a curved upholstered bed, coved ceiling lighting and walnut paneling" loading="lazy" />
       </div>
 
       <div class="features">
@@ -348,20 +376,47 @@
       <div class="gallery__viewport">
         <ul class="gallery__track">
           <li class="gallery__slide" data-caption="Dining room" aria-roledescription="slide">
-            <img src="assets/images/gallery-dining-1.jpg" alt="Dining room with swivel lounge chairs, marble side tables and a woman in a red dress" loading="lazy" />
+            <img src="assets/images/gallery-dining.jpg" alt="Dining room with a walnut table and leather chairs" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Kitchen" aria-roledescription="slide">
+            <img src="assets/images/gallery-kitchen-1.jpg" alt="Kitchen with white oak cabinetry and marble" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Kitchen" aria-roledescription="slide">
+            <img src="assets/images/gallery-kitchen-2.jpg" alt="Kitchen view toward the living area" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Kitchen" aria-roledescription="slide">
+            <img src="assets/images/gallery-kitchen-3.jpg" alt="Kitchen detail" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Lounge" aria-roledescription="slide">
+            <img src="assets/images/gallery-lounge.jpg" alt="Lounge seating with skyline views" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Primary bedroom" aria-roledescription="slide">
+            <img src="assets/images/gallery-primary-bedroom-1.jpg" alt="Primary bedroom" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Primary bedroom" aria-roledescription="slide">
+            <img src="assets/images/gallery-primary-bedroom-2.jpg" alt="Primary bedroom sitting area" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Primary bath" aria-roledescription="slide">
+            <img src="assets/images/gallery-primary-bath.jpg" alt="Primary bath" loading="lazy" />
           </li>
           <li class="gallery__slide" data-caption="Bedroom" aria-roledescription="slide">
-            <img src="assets/images/gallery-bedroom-2.jpg" alt="Bedroom with walnut paneling and marble accents" loading="lazy" />
+            <img src="assets/images/gallery-bedroom-2.jpg" alt="Second bedroom" loading="lazy" />
           </li>
-          <li class="gallery__slide" data-caption="Kitchen &amp; bar" aria-roledescription="slide">
-            <img src="assets/images/gallery-dining-2.jpg" alt="Kitchen cabinetry and bar beside the dining area" loading="lazy" />
+          <li class="gallery__slide" data-caption="Bedroom" aria-roledescription="slide">
+            <img src="assets/images/gallery-bedroom-3.jpg" alt="Third bedroom" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Guest bath" aria-roledescription="slide">
+            <img src="assets/images/gallery-guest-bath.jpg" alt="Guest bath" loading="lazy" />
+          </li>
+          <li class="gallery__slide" data-caption="Terrace" aria-roledescription="slide">
+            <img src="assets/images/gallery-terrace.jpg" alt="Wraparound terrace" loading="lazy" />
           </li>
         </ul>
       </div>
 
       <div class="gallery__controls">
         <p class="gallery__caption" aria-live="polite">
-          <span class="gallery__count">01 / 03</span>
+          <span class="gallery__count">01 / 12</span>
           <span class="gallery__title">Dining room</span>
         </p>
         <div class="gallery__nav">
@@ -414,12 +469,12 @@
 
       <!-- Desktop: images in row 1, text in row 2. Mobile: image, text, image, text… -->
       <div class="packages">
-        <a class="packages__image" href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer" aria-label="Scott + Cooner (opens in a new tab)"><img src="assets/images/furniture-sofa.jpg" alt="Living Divani Echoo sectional sofa in a dark showroom" loading="lazy" /></a>
+        <a class="packages__image" href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer" aria-label="Scott + Cooner (opens in a new tab)"><img src="assets/images/furniture-lounge.jpg" alt="Lounge with four leather swivel chairs around a glass coffee table, framed by skyline views" loading="lazy" /></a>
         <div class="package">
           <h3><a href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer">Furniture</a></h3>
           <p>Handpicked pieces for the living room, dining room, kitchen seating and all three bedrooms, from premium Italian brands like Poltrona Frau, Porada, Poliform, Cassina, and more, made possible by our collaboration with <a class="packages__image" href="https://www.scottcooner.com" target="_blank" rel="noopener noreferrer" aria-label="Scott + Cooner (opens in a new tab)">Scott+Cooner</a>.</p>
         </div>
-        <a class="packages__image" href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer" aria-label="Ferrari Gallery (opens in a new tab)"><img src="assets/images/furniture-touchon.jpg" alt="Black and white Cecil Touchon collage above a leather sofa" loading="lazy" /></a>
+        <a class="packages__image" href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer" aria-label="Ferrari Gallery (opens in a new tab)"><img src="assets/images/furniture-artwork.jpg" alt="Large abstract painting and a purple glass sculpture between two leather armchairs" loading="lazy" /></a>
         <div class="package">
           <h3><a href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer">Artwork</a></h3>
           <p>Curated collection of art pieces, placed and lit for each room — made possible by our collaboration with the <a href="https://www.ferrarigallery.net" target="_blank" rel="noopener noreferrer">Ferrari Gallery</a> and <a class="packages__image" href="https://www.simonwaranch.com" target="_blank" rel="noopener noreferrer" aria-label="Simon Waranch (opens in a new tab)">Simon Waranch</a>.</p>

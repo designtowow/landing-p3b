@@ -23,10 +23,19 @@
     nav.classList.toggle('is-stuck', hero.getBoundingClientRect().bottom <= 72);
   }
 
+  // Scroll cue: 0 at the top of the page, 1 once the visitor is a quarter of the hero down
+  function updateScrollCue() {
+    var p = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight * 0.25)));
+    hero.style.setProperty('--scroll-p', p.toFixed(3));
+  }
+
   if (nav && hero) {
     window.addEventListener('scroll', updateStuck, { passive: true });
+    window.addEventListener('scroll', updateScrollCue, { passive: true });
     window.addEventListener('resize', updateStuck);
+    window.addEventListener('resize', updateScrollCue);
     updateStuck();
+    updateScrollCue();
   }
 
   if (toggle) {
@@ -61,6 +70,7 @@
       if (i) el.appendChild(document.createTextNode(' '));
       var span = document.createElement('span');
       span.textContent = word;
+      span.style.whiteSpace = 'nowrap'; // hyphenated words must measure and wrap as one unit
       el.appendChild(span);
       return span;
     });
@@ -79,6 +89,7 @@
       mask.setAttribute('aria-hidden', 'true');
       var inner = document.createElement('span');
       inner.className = 'reveal-line__inner';
+      inner.style.whiteSpace = 'nowrap'; // lines were measured; don't let the browser re-wrap them
       inner.style.setProperty('--line', i);
       inner.textContent = line.join(' ');
       mask.appendChild(inner);
