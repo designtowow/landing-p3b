@@ -657,7 +657,7 @@ button {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* show the whole 16:9 frame (and controls) in the banner */
   background: #000;
 }
 
