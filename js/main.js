@@ -129,14 +129,14 @@
     });
   }
 
-  /* --- Event modal: Turtle Creek Tour of Homes ----------------------------- */
+  /* --- Event modal: PATRON Presents CURATED ----------------------------- */
   // One-time event. Opens once per visitor after they scroll past the hero or
   // spend a few seconds on the page; the nav link reopens it. Everything
   // switches off after the event ends (data-ends on the dialog).
   var eventModal = document.querySelector('.event-modal');
 
   if (eventModal && eventModal.showModal && Date.now() < Date.parse(eventModal.dataset.ends)) {
-    var EVENT_KEY = 'p3b-tour-of-homes-2026';
+    var EVENT_KEY = 'p3b-curated-2026-11-14';
     var EVENT_DELAY = 8000; // ms
     // Nav link and hero button — hidden in the markup so they vanish after the event
     document.querySelectorAll('[data-event-only]').forEach(function (el) { el.hidden = false; });
